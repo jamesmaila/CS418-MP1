@@ -13,10 +13,8 @@ BASIC INFORMATION:
 
 HOW TO BUILD:
 
-    Install GLUT and OpenGL by typing 
-         "sudo apt-get install freeglut3-dev" 
-    in a Linux terminal.
-    Install Make by typing "sudo apt-get install make" in a Linux terminal.
+    Install GLUT and OpenGL by typing "sudo apt-get install freeglut3-dev" 
+    Install Make by typing "sudo apt-get install make"
     
     After installing, compile by typing "make" in the "cs418_mp1_maila2" directory.
     
