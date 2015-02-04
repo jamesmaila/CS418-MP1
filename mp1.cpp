@@ -6,12 +6,23 @@
 
 #include <math.h>
 #include <GL/glut.h>
+#include <stdio.h>
+#include <string>
+#include <sstream>
+
+using namespace std;
 
 #define FPS 60 
+#define FONT GLUT_BITMAP_TIMES_ROMAN_24
 
 float angle;
 bool paused;
 bool wired;
+
+int frameCount = 0;
+float fps;
+int previousTime;
+
 
 /*
  * DrawI
@@ -94,6 +105,30 @@ void DrawBackground()
     glEnd();
 }
 
+
+void DrawFPS()
+{
+
+	if (fps != 0)
+	{  
+				glColor3f(1.0, 0.5, 0.0);
+		  glRasterPos2f(-.75, -.75);
+
+		  ostringstream stream;
+		  stream << "FPS: " << fps;
+		  string fpsString = stream.str();
+
+		  int length = fpsString.length();
+		  for (int i = 0; i < length; i++)
+		  {
+		    glutBitmapCharacter(FONT, fpsString[i]);
+		  }
+
+	}
+
+
+}
+
 /*
  * Display
  *     Inputs: None.
@@ -112,6 +147,8 @@ void Display()
 
     // orange I on top of gradient background
     DrawI();
+
+    DrawFPS();
 
     glFlush();
     glutSwapBuffers();
@@ -139,6 +176,33 @@ void Keyboard(unsigned char key, int x, int y)
     }
 }
 
+
+
+void CalculateFPS()
+{
+    //  Increase frame count
+    frameCount++;
+ 
+    //  Get the number of milliseconds since glutInit called
+    //  (or first call to glutGet(GLUT ELAPSED TIME)).
+    int currentTime = glutGet(GLUT_ELAPSED_TIME);
+ 
+    //  Calculate time passed
+    int timeInterval = currentTime - previousTime;
+ 
+    if(timeInterval > 1000)
+    {
+        //  calculate the number of frames per second
+        fps = frameCount / (timeInterval / 1000.0f);
+ 
+        //  Set time
+        previousTime = currentTime;
+ 
+        //  Reset frame count
+        frameCount = 0;
+    }	
+}
+
 /*
  * Timer
  *     Inputs: v - Value of the glutTimerFunc value parameter.
@@ -149,6 +213,8 @@ void Keyboard(unsigned char key, int x, int y)
 void Timer(int v)
 {
     if (!paused) { angle += .15; }
+
+    if (!paused) { CalculateFPS(); }
 
     glutPostRedisplay();
     glutTimerFunc(1000/FPS, Timer, v);
