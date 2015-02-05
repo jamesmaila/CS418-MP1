@@ -12,7 +12,7 @@
 
 using namespace std;
 
-#define FPS 60 
+#define FPS 60
 #define FONT GLUT_BITMAP_TIMES_ROMAN_24
 
 float angle;
@@ -51,38 +51,71 @@ void DrawI()
     if (wired) { glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); }
 
     // color orange
-    glColor3f(1.0, 0.5, 0.0);
+    //glColor3f(1.0, 0.5, 0.0);
 
     float a = 0.025 * sin(angle);
     float b = 0.025 * cos(angle);
 
+    glRotatef(angle, 0.0, 0.0, 1.0);
     glBegin(GL_TRIANGLE_FAN);
+   		wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
+        	glVertex2f(-0.1,  0.3 + b);           // #1
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
+        	glVertex2f(-0.3 - b,  0.3 + a);       // #2
+        	glVertex2f(-0.3 - b,  0.5 - a);       // #3
+        
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+        	glVertex2f( 0.3 + b,  0.5 + a);       // #4
+	    wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
+	        glVertex2f( 0.1,  0.3 + b);           // #6
+	        glVertex2f( 0.1, -0.3 + b);           // #7
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
+        	glVertex2f(-0.1, -0.3 + b);           // #12
+    glEnd();
+
+    glBegin(GL_TRIANGLE_FAN);
+    	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+        	glVertex2f( 0.3 + b, -0.5 - a);       // #9
+        	glVertex2f( 0.3 + b, -0.3);           // #8
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
+        	glVertex2f( 0.1, -0.3 + b);           // #7
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
+        	glVertex2f(-0.1, -0.3 + b);           // #12
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
+        	glVertex2f(-0.3 - b, -0.5 + a);       // #10
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
+        	glVertex2f(-0.3 - b, -0.5 + a);       // #10
+        	glVertex2f(-0.3 - b, -0.3);           // #11
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
+        	glVertex2f(-0.1, -0.3 + b);           // #12
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+        	glVertex2f( 0.3 + b, 0.5 + a);        // #4
+        	glVertex2f( 0.3 + b, 0.3 + a);        // #5
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
+        	glVertex2f( 0.1, 0.3 + b);            // #6
+    glEnd();
+
+    
+    glLineWidth(4.0);
+    wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+    glBegin(GL_LINE_LOOP);
         glVertex2f(-0.1,  0.3 + b);           // #1
         glVertex2f(-0.3 - b,  0.3 + a);       // #2
         glVertex2f(-0.3 - b,  0.5 - a);       // #3
         glVertex2f( 0.3 + b,  0.5 + a);       // #4
+        glVertex2f( 0.3 + b, 0.3 + a);        // #5
         glVertex2f( 0.1,  0.3 + b);           // #6
         glVertex2f( 0.1, -0.3 + b);           // #7
-        glVertex2f(-0.1, -0.3 + b);           // #12
-    glEnd();
-
-    glBegin(GL_TRIANGLE_FAN);
-        glVertex2f( 0.3 + b, -0.5 - a);       // #9
         glVertex2f( 0.3 + b, -0.3);           // #8
-        glVertex2f( 0.1, -0.3 + b);           // #7
-        glVertex2f(-0.1, -0.3 + b);           // #12
-        glVertex2f(-0.3 - b, -0.5 + a);       // #10
-    glEnd();
-
-    glBegin(GL_TRIANGLES);
+        glVertex2f( 0.3 + b, -0.5 - a);       // #9
         glVertex2f(-0.3 - b, -0.5 + a);       // #10
         glVertex2f(-0.3 - b, -0.3);           // #11
         glVertex2f(-0.1, -0.3 + b);           // #12
-
-        glVertex2f( 0.3 + b, 0.5 + a);        // #4
-        glVertex2f( 0.3 + b, 0.3 + a);        // #5
-        glVertex2f( 0.1, 0.3 + b);            // #6
     glEnd();
+
 }
 
 /*
@@ -105,29 +138,59 @@ void DrawBackground()
     glEnd();
 }
 
-
+/*
+ * DrawFPS
+ *     Inputs: None.
+ *     Outputs: None.
+ *     Description: Draws the frames per second to the screen.
+ */
 void DrawFPS()
 {
+		// orange
+	glColor3f(1.0, 0.5, 0.0);
 
-	if (fps != 0)
-	{  
-				glColor3f(1.0, 0.5, 0.0);
-		  glRasterPos2f(-.75, -.75);
+    glRotatef(-angle, 0.0, 0.0, 1.0);
 
-		  ostringstream stream;
-		  stream << "FPS: " << fps;
-		  string fpsString = stream.str();
+	glRasterPos2f(-.75, -.75);
 
-		  int length = fpsString.length();
-		  for (int i = 0; i < length; i++)
-		  {
-		    glutBitmapCharacter(FONT, fpsString[i]);
-		  }
+	ostringstream stream;
+	
+	if (fps == 0) { stream << "Calculating FPS..."; }
+	else { stream << "FPS: " << fps; }
 
+	string fpsString = stream.str();
+
+	int length = fpsString.length();
+	for (int i = 0; i < length; i++)
+	{
+		glutBitmapCharacter(FONT, fpsString[i]);
 	}
-
-
 }
+
+/*
+ * CalculateFPS
+ *     Inputs: None.
+ *     Outputs: None.
+ *     Description: Calculates the running frames per second.
+ */
+void CalculateFPS()
+{
+    frameCount++;
+ 
+    int currentTime = glutGet(GLUT_ELAPSED_TIME);
+ 
+    int timeInterval = currentTime - previousTime;
+ 
+    if (timeInterval > 1000)
+    {
+        fps = frameCount / (timeInterval / 1000.0f);
+ 
+        previousTime = currentTime;
+ 
+        frameCount = 0;
+    }	
+}
+
 
 /*
  * Display
@@ -142,12 +205,8 @@ void Display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // gradient background first
     DrawBackground();
-
-    // orange I on top of gradient background
     DrawI();
-
     DrawFPS();
 
     glFlush();
@@ -174,33 +233,6 @@ void Keyboard(unsigned char key, int x, int y)
         // exits animation
         case 27: exit(0);
     }
-}
-
-
-
-void CalculateFPS()
-{
-    //  Increase frame count
-    frameCount++;
- 
-    //  Get the number of milliseconds since glutInit called
-    //  (or first call to glutGet(GLUT ELAPSED TIME)).
-    int currentTime = glutGet(GLUT_ELAPSED_TIME);
- 
-    //  Calculate time passed
-    int timeInterval = currentTime - previousTime;
- 
-    if(timeInterval > 1000)
-    {
-        //  calculate the number of frames per second
-        fps = frameCount / (timeInterval / 1000.0f);
- 
-        //  Set time
-        previousTime = currentTime;
- 
-        //  Reset frame count
-        frameCount = 0;
-    }	
 }
 
 /*
