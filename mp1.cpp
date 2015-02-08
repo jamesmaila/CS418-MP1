@@ -58,67 +58,67 @@ void DrawI()
     // top left triangle fan
     glBegin(GL_TRIANGLE_FAN);
     {
-   		wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
-        	glVertex2f(-0.1,  0.3 + b);           // #1
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
+            glVertex2f(-0.1,  0.3 + b);           // #1
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
-        	glVertex2f(-0.3 - b,  0.3 + a);       // #2
-        	glVertex2f(-0.3 - b,  0.5 - a);       // #3
+            glVertex2f(-0.3 - b,  0.3 + a);       // #2
+            glVertex2f(-0.3 - b,  0.5 - a);       // #3
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
-        	glVertex2f( 0.3 + b,  0.5 + a);       // #4
+            glVertex2f( 0.3 + b,  0.5 + a);       // #4
 
-	    wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
-	        glVertex2f( 0.1,  0.3 + b);           // #6
-	        glVertex2f( 0.1, -0.3 + b);           // #7
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
+            glVertex2f( 0.1,  0.3 + b);           // #6
+            glVertex2f( 0.1, -0.3 + b);           // #7
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
-        	glVertex2f(-0.1, -0.3 + b);           // #12
+            glVertex2f(-0.1, -0.3 + b);           // #12
     }
     glEnd();
 
     // bottom-right triangle fan
     glBegin(GL_TRIANGLE_FAN);
     {
-    	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
-        	glVertex2f( 0.3 + b, -0.5 - a);       // #9
-        	glVertex2f( 0.3 + b, -0.3);           // #8
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+            glVertex2f( 0.3 + b, -0.5 - a);       // #9
+            glVertex2f( 0.3 + b, -0.3);           // #8
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
-        	glVertex2f( 0.1, -0.3 + b);           // #7
+            glVertex2f( 0.1, -0.3 + b);           // #7
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
-        	glVertex2f(-0.1, -0.3 + b);           // #12
+            glVertex2f(-0.1, -0.3 + b);           // #12
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
-        	glVertex2f(-0.3 - b, -0.5 + a);       // #10
+            glVertex2f(-0.3 - b, -0.5 + a);       // #10
     }
     glEnd();
 
     // last two missing triangles (top-right and bottom-left)
     glBegin(GL_TRIANGLES);
     {
-    	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
-        	glVertex2f(-0.3 - b, -0.5 + a);       // #10
-        	glVertex2f(-0.3 - b, -0.3);           // #11
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
+            glVertex2f(-0.3 - b, -0.5 + a);       // #10
+            glVertex2f(-0.3 - b, -0.3);           // #11
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
-        	glVertex2f(-0.1, -0.3 + b);           // #12
+            glVertex2f(-0.1, -0.3 + b);           // #12
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
-        	glVertex2f( 0.3 + b, 0.5 + a);        // #4
-        	glVertex2f( 0.3 + b, 0.3 + a);        // #5
+            glVertex2f( 0.3 + b, 0.5 + a);        // #4
+            glVertex2f( 0.3 + b, 0.3 + a);        // #5
 
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
-        	glVertex2f( 0.1, 0.3 + b);            // #6
+            glVertex2f( 0.1, 0.3 + b);            // #6
     }
     glEnd();
 
     // border around I
     glBegin(GL_LINE_LOOP);
     {
-    	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
-    	glVertex2f(-0.1,  0.3 + b);           // #1
+        wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+        glVertex2f(-0.1,  0.3 + b);           // #1
         glVertex2f(-0.3 - b,  0.3 + a);       // #2
         glVertex2f(-0.3 - b,  0.5 - a);       // #3
         glVertex2f( 0.3 + b,  0.5 + a);       // #4
@@ -165,26 +165,26 @@ void DrawBackground()
  */
 void DrawFPS()
 {
-	// orange
-	glColor3f(1.0, 0.5, 0.0);
+    // orange
+    glColor3f(1.0, 0.5, 0.0);
 
-	// rotate opposite direction to I to keep FPS stationary
+    // rotate opposite direction to I to keep FPS stationary
     glRotatef(-angle, 0.0, 0.0, 1.0);
 
-	glRasterPos2f(-.75, .75);
+    glRasterPos2f(-.75, .75);
 
-	ostringstream stream;
-	
-	(fps == 0) ? (stream << "Calculating FPS...") 
-			   : (stream << "FPS: " << fps);
+    ostringstream stream;
+    
+    (fps == 0) ? (stream << "Calculating FPS...") 
+               : (stream << "FPS: " << fps);
 
-	string fpsString = stream.str();
-	int length = fpsString.length();
+    string fpsString = stream.str();
+    int length = fpsString.length();
 
-	for (int i = 0; i < length; i++)
-	{
-		glutBitmapCharacter(FONT, fpsString[i]);
-	}
+    for (int i = 0; i < length; i++)
+    {
+        glutBitmapCharacter(FONT, fpsString[i]);
+    }
 }
 
 /*
@@ -208,7 +208,7 @@ void CalculateFPS()
         previousTime = currentTime;
  
         frameCount = 0;
-    }	
+    }   
 }
 
 
@@ -266,8 +266,8 @@ void Timer(int v)
 {
     if (!paused)
     { 
-    	angle += .15; 
-    	CalculateFPS();
+        angle += .15; 
+        CalculateFPS();
     }
 
     glutPostRedisplay();
