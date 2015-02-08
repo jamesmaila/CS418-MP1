@@ -50,59 +50,75 @@ void DrawI()
     // if wired state, apply line polygon mode
     if (wired) { glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); }
 
-    // color orange
-    //glColor3f(1.0, 0.5, 0.0);
-
     float a = 0.025 * sin(angle);
     float b = 0.025 * cos(angle);
 
     glRotatef(angle, 0.0, 0.0, 1.0);
+
+    // top left triangle fan
     glBegin(GL_TRIANGLE_FAN);
+    {
    		wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
         	glVertex2f(-0.1,  0.3 + b);           // #1
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
         	glVertex2f(-0.3 - b,  0.3 + a);       // #2
         	glVertex2f(-0.3 - b,  0.5 - a);       // #3
-        
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
         	glVertex2f( 0.3 + b,  0.5 + a);       // #4
+
 	    wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
 	        glVertex2f( 0.1,  0.3 + b);           // #6
 	        glVertex2f( 0.1, -0.3 + b);           // #7
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
         	glVertex2f(-0.1, -0.3 + b);           // #12
+    }
     glEnd();
 
+    // bottom-right triangle fan
     glBegin(GL_TRIANGLE_FAN);
+    {
     	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
         	glVertex2f( 0.3 + b, -0.5 - a);       // #9
         	glVertex2f( 0.3 + b, -0.3);           // #8
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
         	glVertex2f( 0.1, -0.3 + b);           // #7
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
         	glVertex2f(-0.1, -0.3 + b);           // #12
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
         	glVertex2f(-0.3 - b, -0.5 + a);       // #10
+    }
     glEnd();
 
+    // last two missing triangles (top-right and bottom-left)
     glBegin(GL_TRIANGLES);
+    {
     	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(1.0, 0.5, 0.0);
         	glVertex2f(-0.3 - b, -0.5 + a);       // #10
         	glVertex2f(-0.3 - b, -0.3);           // #11
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.8, 0.3, 0.0);
         	glVertex2f(-0.1, -0.3 + b);           // #12
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
         	glVertex2f( 0.3 + b, 0.5 + a);        // #4
         	glVertex2f( 0.3 + b, 0.3 + a);        // #5
+
         wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.6, 0.15, 0.0);
         	glVertex2f( 0.1, 0.3 + b);            // #6
+    }
     glEnd();
 
-    
-    glLineWidth(4.0);
-    wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+    // border around I
     glBegin(GL_LINE_LOOP);
-        glVertex2f(-0.1,  0.3 + b);           // #1
+    {
+    	wired ? glColor3f(1.0, 0.5, 0.0) : glColor3f(0.0, 0.0, 0.0);
+    	glVertex2f(-0.1,  0.3 + b);           // #1
         glVertex2f(-0.3 - b,  0.3 + a);       // #2
         glVertex2f(-0.3 - b,  0.5 - a);       // #3
         glVertex2f( 0.3 + b,  0.5 + a);       // #4
@@ -114,6 +130,7 @@ void DrawI()
         glVertex2f(-0.3 - b, -0.5 + a);       // #10
         glVertex2f(-0.3 - b, -0.3);           // #11
         glVertex2f(-0.1, -0.3 + b);           // #12
+    }
     glEnd();
 
 }
@@ -129,12 +146,14 @@ void DrawBackground()
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     glBegin(GL_QUADS);
+    {
         glColor3f(0.0, 0.0, 0.0);
         glVertex2f(-1.0,  1.0);
         glVertex2f(-1.0, -1.0);
         glColor3f(0.0, 0.0, 1.0);
         glVertex2f(1.0, -1.0);
         glVertex2f(1.0, 1.0);
+    }
     glEnd();
 }
 
@@ -146,21 +165,22 @@ void DrawBackground()
  */
 void DrawFPS()
 {
-		// orange
+	// orange
 	glColor3f(1.0, 0.5, 0.0);
 
+	// rotate opposite direction to I to keep FPS stationary
     glRotatef(-angle, 0.0, 0.0, 1.0);
 
-	glRasterPos2f(-.75, -.75);
+	glRasterPos2f(-.75, .75);
 
 	ostringstream stream;
 	
-	if (fps == 0) { stream << "Calculating FPS..."; }
-	else { stream << "FPS: " << fps; }
+	(fps == 0) ? (stream << "Calculating FPS...") 
+			   : (stream << "FPS: " << fps);
 
 	string fpsString = stream.str();
-
 	int length = fpsString.length();
+
 	for (int i = 0; i < length; i++)
 	{
 		glutBitmapCharacter(FONT, fpsString[i]);
@@ -183,7 +203,7 @@ void CalculateFPS()
  
     if (timeInterval > 1000)
     {
-        fps = frameCount / (timeInterval / 1000.0f);
+        fps = frameCount / (timeInterval/1000.0);
  
         previousTime = currentTime;
  
@@ -244,9 +264,11 @@ void Keyboard(unsigned char key, int x, int y)
  */
 void Timer(int v)
 {
-    if (!paused) { angle += .15; }
-
-    if (!paused) { CalculateFPS(); }
+    if (!paused)
+    { 
+    	angle += .15; 
+    	CalculateFPS();
+    }
 
     glutPostRedisplay();
     glutTimerFunc(1000/FPS, Timer, v);
