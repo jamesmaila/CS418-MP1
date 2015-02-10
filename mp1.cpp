@@ -50,6 +50,8 @@ void DrawI()
     // if wired state, apply line polygon mode
     if (wired) { glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); }
 
+    glLineWidth(2.5);
+
     float a = 0.025 * sin(angle);
     float b = 0.025 * cos(angle);
 

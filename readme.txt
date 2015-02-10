@@ -20,6 +20,10 @@ HOW TO BUILD:
     
     After compiling, run with "./mp1"
 
+VIDEO DEMO:
+
+    https://www.youtube.com/watch?v=eIwivg7CqrM
+
 CONTROLS:
 
     'w': expose wires to show polygons
